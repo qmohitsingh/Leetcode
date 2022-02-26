@@ -1,28 +1,32 @@
 
 // Time - O(n), Space - O(n)
 class Solution {
-    
-    public int[] twoSum(int[] nums, int target) {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int,int> map;
         
-        int[] result = new int[2];
+        vector<int> ans;
         
-        Map<Integer, Integer> hashMap = new HashMap<>();
+        for (int i=0; i<nums.size(); i++) {
+            map[nums[i]] = i;
+        }
         
-        for (int i=0; i<nums.length; i++) {
+        for (int i=0; i<nums.size(); i++) {
             
-            if (hashMap.containsKey(target-nums[i])) {
-                result[0] = i;
-                result[1] = hashMap.get(target-nums[i]);
+            int compliment = target-nums[i];
+            
+            if (map.find(compliment) != map.end() && map[compliment] != i) {
+                ans.push_back(i);
+                ans.push_back(map[compliment]);
+                
                 break;
             }
-            
-            hashMap.put(nums[i], i);
         }
-    
-        return result;
+        
+        return ans;
         
     }
-}
+};
 
 /*
 
