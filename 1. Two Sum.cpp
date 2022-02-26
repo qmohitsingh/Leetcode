@@ -1,9 +1,8 @@
+
+// Time - O(n), Space - O(n)
 class Solution {
     
     public int[] twoSum(int[] nums, int target) {
-        
-        Integer low=0, 
-        high=nums.length-1;
         
         int[] result = new int[2];
         
