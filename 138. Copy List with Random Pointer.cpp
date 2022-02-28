@@ -28,6 +28,7 @@ public:
         
         unordered_map<Node*, Node*> map;
         
+         // Adding next pointer and values
         while(headCopy1 != NULL) {
             
             Node* temp = new Node(headCopy1->val);
@@ -45,6 +46,7 @@ public:
         
         dummy = root->next;
         
+        // Adding random pointer
         while(headCopy2 != NULL) {
             
             dummy->random = map[headCopy2->random];
