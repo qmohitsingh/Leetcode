@@ -58,3 +58,52 @@ public:
         return root->next;
     }
 };
+
+
+// After Refactoring the code : 
+
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* next;
+    Node* random;
+    
+    Node(int _val) {
+        val = _val;
+        next = NULL;
+        random = NULL;
+    }
+};
+*/
+
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        
+        Node* dummy = head;
+        
+        unordered_map<Node*, Node*> map;
+        
+        // Step-1 : Copy the original list;
+        while(dummy != NULL) {
+            map[dummy] = new Node(dummy->val);
+            dummy = dummy->next;
+        }
+        
+        
+        dummy = head;
+        
+        // Step-2 : Add pointers (next & random ones);
+        while(dummy != NULL) {
+            
+            map[dummy]->next = map[dummy->next];
+            map[dummy]->random = map[dummy->random];
+            
+            dummy = dummy->next;
+        }
+        
+        return map[head];
+    }
+};
