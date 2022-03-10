@@ -42,3 +42,48 @@ public:
         
     }
 };
+
+// Approach: 2, with constant space
+class Solution {
+public:
+    bool checkValid(vector<vector<int>>& matrix) {
+        
+        
+        int rows = matrix.size();
+        
+        if (rows == 0) 
+            return true;
+        
+        int columns = matrix[0].size();
+        
+        if (rows != columns)
+            return false;
+        
+        // Row wise scan
+        for (int i=0; i<rows; i++) {
+            for (int j=0; j<columns; j++) {
+                int index = abs(matrix[i][j]) - 1;
+                if (matrix[i][index] < 0)
+                    return false;
+                else 
+                    matrix[i][index] = -matrix[i][index];
+            }     
+        }
+        
+        // Column wise scan
+        for (int i=0; i<rows; i++) {
+            for (int j=0; j<columns; j++) {
+                int index = abs(matrix[j][i])-1;
+                if (matrix[index][i] > 0)
+                    return false;
+                else {
+                    matrix[index][i] = -matrix[index][i];
+                }
+                
+            }     
+        }
+        
+        return true;
+        
+    }
+};
