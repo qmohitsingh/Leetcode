@@ -81,12 +81,7 @@ public:
     
     TreeNode* insertIntoMaxTree(TreeNode* root, int val) {
         
-        if (root == NULL) {
-            TreeNode* temp = new TreeNode(val);
-            return temp;
-        }
-        
-        if (root->val < val) {
+        if (root == NULL || root->val < val) {
             TreeNode* temp = new TreeNode(val);
             temp->left = root;
             return temp;
