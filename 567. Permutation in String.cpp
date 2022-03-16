@@ -4,42 +4,37 @@ class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
         
-        
-        if (s1.length() > s2.length())
-            return false;
-        
-        int low = 0, high = 0;
-        vector<int> map(26);
-        
+        vector<int> s1map(26, 0);
         vector<int> s2map(26, 0);
         
-        for (auto c : s1)
-            map[c-'a']++;
+        int len1 = s1.length();
+        int len2 = s2.length();
         
-        while(high < s2.length()) {
+        if (len2 < len1) 
+            return false;
+        
+        for (int i=0; i<s1.length(); i++) {
+            s1map[s1[i] - 'a']++;
+            s2map[s2[i] - 'a']++;
+        }
+        
+        if (s1map == s2map) return true;
             
-            int index = s2[high] - 'a';
+        
+        int low = 0, high = len1;
+        
+        while(high < len2) {                                                                                                                                              
+            
+            s2map[s2[high] - 'a']++;
             high++;
             
-            s2map[index]++;
+            s2map[s2[low] - 'a']--;
+            low++;
             
-            if (!map[index]) {
-                fill(s2map.begin(), s2map.end(), 0);
-                low = high;
-                continue;
-            }
-            
-            while(map[index] < s2map[index]) {
-                int lowIdx = s2[low] - 'a';
-                s2map[lowIdx]--;
-                low++;
-            }
-            
-            if (map == s2map) 
-                return true;
+            if (s1map == s2map) return true;
             
         }
-    
+        
         return false;
         
     }
